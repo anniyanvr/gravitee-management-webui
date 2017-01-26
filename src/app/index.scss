@@ -1,9 +1,32 @@
-/**
- *  Do not remove this comments bellow. It's the markers used by wiredep to inject
- *  sass dependencies when defined in the bower.json of your dependencies
- */
-// bower:scss
-// endbower
+@import 'main/_main.scss';
+@import 'user/_user.scss';
+@import 'policy/_policy.scss';
+
+@import 'api/_api.scss';
+@import 'api/admin/analytics/_analytics.scss';
+@import 'api/admin/creation/_apiCreation.scss';
+@import 'api/admin/documentation/_apiDocumentation.scss';
+@import 'api/admin/events/_apiEvents.scss';
+@import 'api/admin/healthcheck/_healthcheck.scss';
+@import 'api/admin/history/_apiHistory.scss';
+@import 'api/admin/members/_members.scss';
+@import 'api/admin/plans/_apiPlans.scss';
+@import 'api/admin/properties/_properties.scss';
+@import 'api/admin/resources/_resources.scss';
+@import 'api/admin/subscriptions/_subscriptions.scss';
+@import 'api/portal/plan/_plan.scss';
+
+@import 'application/applications.scss';
+
+@import 'components/dashboard/dashboard.scss';
+@import 'components/sidenav/_sidenav.scss';
+@import 'components/image/_image.scss';
+@import 'components/widget/_widget.scss';
+
+@import 'instances/_instances.scss';
+
+@import 'platform/dashboard/_dashboard.scss';
+
 
 $backgroundColor: rgb(45,50,62);
 

@@ -18,8 +18,8 @@
 <div class="widget-card" flex>
   <md-card-title class="gravitee-widget-draggable">
     <md-card-title-text>
-      <span class="md-title"><strong>{{ widget.title }}</strong></span>
-      <span class="md-subhead">{{ widget.subhead }}</span>
+      <span class="md-title"><strong>{{ $ctrl.widget.title }}</strong></span>
+      <span class="md-subhead">{{ $ctrl.widget.subhead }}</span>
     </md-card-title-text>
     <md-card-title-media>
       <!--
@@ -29,6 +29,19 @@
     </md-card-title-media>
   </md-card-title>
   <md-card-content>
-    <gravitee-widget-chart chart="widget.chart"></gravitee-widget-chart>
+    <div ng-if="$ctrl.fetchData" layout="column" layout-align="center center" flex>
+      <md-progress-circular md-mode="indeterminate" class="md-accent md-hue-1" md-diameter="50"></md-progress-circular>
+    </div>
+
+    <div ng-if="!$ctrl.fetchData && $ctrl.results" ng-switch on="$ctrl.widget.chart.type">
+      <gv-widget-data-table ng-switch-when="table" data="$ctrl.results"></gv-widget-data-table>
+      <gv-widget-chart-line ng-switch-when="line" data="$ctrl.results"></gv-widget-chart-line>
+      <gv-widget-chart-pie ng-switch-when="pie" data="$ctrl.results"></gv-widget-chart-pie>
+    </div>
+
+    <div ng-if="!$ctrl.fetchData && !$ctrl.results" layout="column" layout-align="center center" flex>
+      <p><ng-md-icon icon="block" style="fill: grey"></ng-md-icon></p>
+      <p>No data</p>
+    </div>
   </md-card-content>
 </div>

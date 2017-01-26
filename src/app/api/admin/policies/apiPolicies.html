@@ -54,7 +54,7 @@
             <v-pane-header>
               <h3 class="gravitee-policy-path" ng-if='path === "/"'>{{path}}</h3>
               <div ng-if='path !== "/"' layout="row" layout-align="space-between center">
-                <div flex="80">
+                <div flex="90">
                   <md-input-container style="margin: 0;width: 100%;">
                     <input ng_model="path"
                            name="path{{$index}}"
@@ -76,7 +76,13 @@
                     </div>
                   </md-input-container>
                 </div>
-                <div flex><a href ng-click="apiPoliciesCtrl.removePath(path);$event.stopPropagation();">remove path</a></div>
+                <div flex>
+                  <ng-md-icon icon="delete" style="fill: #757575" size="18px" ng-click="apiPoliciesCtrl.removePath(path);$event.stopPropagation();">
+                    <md-tooltip md-direction="right">
+                      Remove path
+                    </md-tooltip>
+                  </ng-md-icon>
+                </div>
               </div>
             </v-pane-header>
             <v-pane-content>

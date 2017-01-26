@@ -29,7 +29,7 @@
           </tr>
           </thead>
           <tbody md-body>
-          <tr md-row ng-repeat="resource in apiResourcesCtrl.api.resources track by $index | orderBy: order">
+          <tr md-row ng-repeat="resource in apiResourcesCtrl.api.resources | orderBy: order">
             <td md-cell>{{resource.name}}</td>
             <td md-cell><span><b>{{resource.type}}</b></span></td>
             <td md-cell>

@@ -1,0 +1,20 @@
+@import './app/_constants';
+@import '~angular-material/angular-material';
+@import '~angular-material-data-table/dist/md-data-table.min';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~angular-gridster/dist/angular-gridster.min.css';
+@import '~angular-swagger-ui/dist/css/swagger-ui.min.css';
+@import '~dragular/dist/dragular';
+@import '~v-accordion/dist/v-accordion.min.css';
+
+@import '~codemirror/lib/codemirror';
+@import '~codemirror/addon/dialog/dialog';
+@import '~codemirror/addon/lint/lint';
+
+@import '~angular-timeline/dist/angular-timeline.css';
+
+@import './app/index.scss';
+
+body {
+  background-color: lightgrey;
+}

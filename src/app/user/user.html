@@ -15,35 +15,35 @@
     limitations under the License.
 
 -->
-<form name="formUser" ng-submit="userCtrl.save()" novalidate>
+<form name="formUser" ng-submit="$ctrl.save()" novalidate>
   <md-card class="gravitee-user-container">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">User information</span>
-        <span class="md-subhead" ng-bind="graviteeUser.username"></span>
+        <span class="md-subhead" ng-bind="$ctrl.user.username"></span>
       </md-card-title-text>
       <md-card-title-media style="text-align: center;">
-        <gravitee-image image="graviteeUser.picture" image-original="originalPicture" image-default="app/images/GRAVITEE_LOGO1-01.png" image-border-radius="true"
+        <gravitee-image image="$ctrl.user.picture" image-original="originalPicture" image-default="app/images/GRAVITEE_LOGO1-01.png" image-border-radius="true"
             image-form="formUser"></gravitee-image>
       </md-card-title-media>
     </md-card-title>
     <md-card-content>
       <div layout="row">
         <ng-md-icon flex="10" icon="person"></ng-md-icon>
-        <label>{{graviteeUser.lastname || '-'}} {{graviteeUser.firstname || '-'}}</label>
+        <label>{{$ctrl.user.lastname || '-'}} {{$ctrl.user.firstname || '-'}}</label>
       </div>
       <div layout="row">
         <ng-md-icon flex="10" icon="contact_mail"></ng-md-icon>
-        <label>{{graviteeUser.email || '-'}}</label>
+        <label>{{$ctrl.user.email || '-'}}</label>
       </div>
       <div layout="row">
         <ng-md-icon flex="10" icon="lock"></ng-md-icon>
-        <label ng-repeat="auth in graviteeUser.authorities">{{auth.authority}}{{$last ? '' : ',&nbsp'}}</label>
+        <label ng-repeat="auth in $ctrl.user.authorities">{{auth.authority}}{{$last ? '' : ',&nbsp'}}</label>
       </div>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
       <md-button type="submit" ng-disabled="formUser.$pristine">Update</md-button>
-      <md-button ng-click="userCtrl.cancel()" ng-disabled="formUser.$pristine">Cancel</md-button>
+      <md-button ng-click="$ctrl.cancel()" ng-disabled="formUser.$pristine">Cancel</md-button>
     </md-card-actions>
   </md-card>
 </form>

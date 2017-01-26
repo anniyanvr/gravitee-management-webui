@@ -1,0 +1,7 @@
+{
+    "baseURL": "/management/",
+    "version": "1.3.3",
+    "portalTitle": "Gravitee.io Portal",
+    "devMode": false,
+    "userCreationEnabled": true
+}

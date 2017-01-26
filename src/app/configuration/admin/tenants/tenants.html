@@ -32,19 +32,19 @@
     </tr>
     </thead>
     <tbody md-body>
-    <tr md-row ng-repeat="tenant in tenantsCtrl.tenants | orderBy: order">
-      <td md-cell ng-click="tenantsCtrl.editName($event, tenant)"
+    <tr md-row ng-repeat="tenant in $ctrl.tenants | orderBy: order">
+      <td md-cell ng-click="$ctrl.editName($event, tenant)"
           ng-class="{'gravitee-placeholder': !tenant.name}">
         {{tenant.name || 'Add a name'}}
       </td>
-      <td md-cell ng-click="tenantsCtrl.editDescription($event, tenant)"
+      <td md-cell ng-click="$ctrl.editDescription($event, tenant)"
           ng-class="{'gravitee-placeholder': !tenant.description}">
         {{tenant.description || 'Add a description'}}
       </td>
-      <td md-cell><ng-md-icon icon="delete" ng-click="tenantsCtrl.deleteTenant(tenant)"></ng-md-icon></td>
+      <td md-cell><ng-md-icon icon="delete" ng-click="$ctrl.deleteTenant(tenant)"></ng-md-icon></td>
     </tr>
     <tr md-row>
-      <td md-cell ng-click="tenantsCtrl.newTenant($event)" class="gravitee-placeholder">
+      <td md-cell ng-click="$ctrl.newTenant($event)" class="gravitee-placeholder">
         New tenant
       </td>
       <td md-cell></td>
@@ -54,9 +54,9 @@
   </table>
 </md-table-container>
 <md-card-actions layout="row" layout-align="end center">
-  <md-button ng-click="tenantsCtrl.saveTenants()"
-             ng-disabled="!tenantsCtrl.tenantsToCreate.length && !tenantsCtrl.tenantsToUpdate.length">Save</md-button>
-  <md-button ng-click="tenantsCtrl.reset()"
-             ng-disabled="!tenantsCtrl.tenantsToCreate.length && !tenantsCtrl.tenantsToUpdate.length">Reset
+  <md-button ng-click="$ctrl.saveTenants()"
+             ng-disabled="!$ctrl.tenantsToCreate.length && !$ctrl.tenantsToUpdate.length">Save</md-button>
+  <md-button ng-click="$ctrl.reset()"
+             ng-disabled="!$ctrl.tenantsToCreate.length && !$ctrl.tenantsToUpdate.length">Reset
   </md-button>
 </md-card-actions>

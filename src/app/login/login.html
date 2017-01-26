@@ -18,18 +18,18 @@
 <md-content class="gravitee-no-sidenav-container" flex>
   <div class="gravitee-no-sidenav-content">
     <div class="gravitee-no-sidenav-header" layout="column">
-      <a ng-click="goToHome()"><img src="app/images/GRAVITEE_LOGOsstxtclair-05.png" /></a>
+      <a ui-sref="home"><img src="app/images/GRAVITEE_LOGOsstxtclair-05.png" /></a>
       <label>Gravitee.io Portal</label>
     </div>
-    <form name="formUser" ng-submit="login()" ng-if="!graviteeUser" layout="column">
+    <form name="formUser" ng-submit="$ctrl.login($event)" layout="column">
       <md-input-container class="md-icon-float">
         <label>Username</label>
-        <input ng-model="user.username" type="text" ng-required="true" autofocus>
+        <input ng-model="$ctrl.user.username" type="text" ng-required="true" autofocus>
       </md-input-container>
 
       <md-input-container class="md-icon-float">
         <label>Password</label>
-        <input ng-model="user.password" type="password" ng-required="true">
+        <input ng-model="$ctrl.user.password" type="password" ng-required="true">
       </md-input-container>
 
       <md-button type="submit" class="md-raised md-primary"
@@ -37,7 +37,7 @@
         Login
       </md-button>
 
-      <a ng-if="userCreationEnabled" ui-sref="registration" class="text-right">Create an account</a>
+      <a ng-if="$ctrl.userCreationEnabled" ui-sref="registration" class="text-right">Create an account</a>
     </form>
   </div>
 </md-content>

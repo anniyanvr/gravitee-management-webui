@@ -36,11 +36,11 @@ class ApiPoliciesController {
     this.listAllPoliciesWithSchema().then( (policiesWithSchema) => {
       _.forEach(policiesWithSchema, ({policy}) => {
       this.policiesToCopy.push(policy);
-    this.policiesMap[policy.policyId] = policy;
-  });
+      this.policiesMap[policy.policyId] = policy;
+    });
     _.forEach(resolvedApi.data.paths, (policies, path) => {
       this.apiPoliciesByPath[path] = _.cloneDeep(policies);
-  });
+    });
     this.completeApiPolicies(this.apiPoliciesByPath);
     this.initDragular();
     this.pathsToCompare = this.generatePathsToCompare();
@@ -286,22 +286,36 @@ class ApiPoliciesController {
     this.$scope.$parent.apiCtrl.api.paths = _.cloneDeep(this.apiPoliciesByPath);
     _.forEach(this.$scope.$parent.apiCtrl.api.paths, (policies, path) => {
       _.forEach(this.$scope.$parent.apiCtrl.api.paths[path], (policy, idx) => {
-      delete this.$scope.$parent.apiCtrl.api.paths[path][idx].policyId;
-    delete this.$scope.$parent.apiCtrl.api.paths[path][idx].name;
-    delete this.$scope.$parent.apiCtrl.api.paths[path][idx].type;
-    //  delete this.$scope.$parent.apiCtrl.api.paths[path][idx].description;
-    delete this.$scope.$parent.apiCtrl.api.paths[path][idx].version;
-    delete this.$scope.$parent.apiCtrl.api.paths[path][idx].schema;
-  });
-  });
+        let pathPolicy = this.$scope.$parent.apiCtrl.api.paths[path][idx];
+        delete pathPolicy.policyId;
+        delete pathPolicy.name;
+        delete pathPolicy.type;
+        delete pathPolicy.version;
+        delete pathPolicy.schema;
 
-    const that = this;
+        // do not save empty fields on arrays
+        _.forEach(Object.keys(pathPolicy), function (pathPolicyAttributeKey) {
+          let pathPolicyAttribute = pathPolicy[pathPolicyAttributeKey];
+          _.forEach(Object.keys(pathPolicyAttribute), function (pathPolicyAttributeAttributeKey) {
+            if (isNaN(pathPolicyAttributeAttributeKey)) {
+              let pathPolicyAttributeAttribute = pathPolicyAttribute[pathPolicyAttributeAttributeKey];
+              if (_.isArray(pathPolicyAttributeAttribute)) {
+                _.remove(pathPolicyAttributeAttribute, function(pathPolicyAttributeAttributeItem) {
+                  return pathPolicyAttributeAttributeItem === undefined ||  '' === pathPolicyAttributeAttributeItem;
+                });
+              }
+            }
+          });
+        });
+      });
+    });
+
     return this.ApiService.update(this.$scope.$parent.apiCtrl.api).then( ( {data} ) => {
-      that.$scope.$parent.apiCtrl.api = data;
-    that.$rootScope.$broadcast('apiChangeSuccess');
-    that.NotificationService.show('API \'' + that.$scope.$parent.apiCtrl.api.name + '\' saved');
-    this.pathsToCompare = this.generatePathsToCompare();
-  });
+      this.$scope.$parent.apiCtrl.api = data;
+      this.$rootScope.$broadcast('apiChangeSuccess');
+      this.NotificationService.show('API \'' + this.$scope.$parent.apiCtrl.api.name + '\' saved');
+      this.pathsToCompare = this.generatePathsToCompare();
+    });
   }
 
   showAddPathModal(event) {

@@ -69,6 +69,7 @@ require('../../node_modules/angular-swagger-ui/dist/scripts/modules/swagger-xml-
 require('../../node_modules/angular-swagger-ui/dist/scripts/modules/swagger1-to-swagger2-converter.min.js');
 require('highcharts');
 require('angular-gridster');
+require('diff/dist/diff.min.js');
 
 // Highcharts
 import * as HighCharts from 'highcharts';
@@ -344,7 +345,7 @@ angular.module('gravitee', ['ui.router', 'ngMaterial', /*'ramlConsoleApp',*/ 'ng
   .directive('noDirtyCheck', () => new FormDirective())
   .directive('autofocus', () => new AutofocusDirective())
   .directive('graviteeRolesAllowed', () => RoleDirective)
-  .directive('graviteeDiff', () => DiffDirective)
+  .directive('graviteeDiff', () => new DiffDirective)
   .directive('graviteeImage', () => new ImageDirective())
   .directive('graviteeDashboardModel', () => new DashboardModelDirective())
   .directive('graviteeEmptyState', () => new EmptyStateDirective())

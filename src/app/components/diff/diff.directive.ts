@@ -14,35 +14,46 @@
  * limitations under the License.
  */
 
-import * as JsDiff from 'jsdiff';
+var JsDiff = require('diff/dist/diff.min.js');
 
-const DiffDirective: ng.IDirectiveFactory = () => ({
-  restrict: 'AE',
-  scope: {
-    oldValue: '=',
-    newValue: '='
-  },
-  link: (scope: any, elem) => {
-    scope.$watch('oldValue', function(){
-      var oldValue = scope.oldValue;
-      var newValue = scope.newValue;
+class DiffDirective {
 
-      if (oldValue && newValue) {
-        elem.html('');
-        var diff = JsDiff.diffJson(oldValue, newValue);
-        diff.forEach(function(part){
-          // green for additions, red for deletions
-          // grey for common parts
-          var color = part.added ? 'green' :
-            part.removed ? 'red' : 'grey';
-          var span = document.createElement('span');
-          span.style.color = color;
-          span.appendChild(document.createTextNode(part.value));
-          elem.append(span);
+  constructor() {
+    'ngInject';
+
+    let directive = {
+      restrict: 'AE',
+      scope: {
+        oldValue: '=',
+        newValue: '='
+      },
+      link: (scope: any, elem) => {
+
+        console.log(JsDiff);
+        scope.$watch('oldValue', function(){
+          var oldValue = scope.oldValue;
+          var newValue = scope.newValue;
+
+          if (oldValue && newValue) {
+            elem.html('');
+            var diff = JsDiff.diffJson(oldValue, newValue);
+            diff.forEach(function(part){
+              // green for additions, red for deletions
+              // grey for common parts
+              var color = part.added ? 'green' :
+                part.removed ? 'red' : 'grey';
+              var span = document.createElement('span');
+              span.style.color = color;
+              span.appendChild(document.createTextNode(part.value));
+              elem.append(span);
+            });
+          }
         });
       }
-    });
+    };
+
+    return directive;
   }
-});
+}
 
 export default DiffDirective;

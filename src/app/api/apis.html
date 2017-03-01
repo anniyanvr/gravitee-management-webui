@@ -103,7 +103,7 @@
                         create-mode="$ctrl.createMode"></gravitee-empty-state>
 
   <div ng-if="!isLoading && $ctrl.apis.length == 0" style="text-align: center;">
-    <md-button ng-if="!graviteeUser" class="md-raised" ng-click="$ctrl.login()" aria-label="login">Login</md-button>
+    <md-button ng-if="!graviteeUser" class="md-raised" ui-sref="login" aria-label="login">Login</md-button>
   </div>
 
   <div ng-style="{'text-align': $ctrl.apis.length == 0 ? 'center' : 'none' }">
